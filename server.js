@@ -10,29 +10,25 @@ const todos = [
 ];
 
 const server = http.createServer((req, res) => {
-  // const { headers, url, method } = req;
-  // console.log(headers, url, method);
-  /// First Method
-  // res.statusCode = 404;
-  // res.setHeader('Content-Type', 'application/json');
-  // res.setHeader('X-Powered-By', 'Node.js');
-
-  // Second Method
-  res.writeHead(404, {
+  res.writeHead(200, {
     'Content-Type': 'application/json',
     'X-Powered-By': 'Node.js',
   });
-  // res.end(
-  //   JSON.stringify({
-  //     success: true,
-  //     data: todos,
-  //   })
-  // );
+
+  let body = [];
+  req
+    .on('data', (chunck) => {
+      body.push(chunck);
+    })
+    .on('end', () => {
+      body = Buffer.concat(body).toString();
+      console.log(body);
+    });
+
   res.end(
     JSON.stringify({
-      succes: false,
-      error: 'Not Found',
-      data: null,
+      success: true,
+      data: todos,
     })
   );
 });
