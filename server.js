@@ -12,12 +12,27 @@ const todos = [
 const server = http.createServer((req, res) => {
   // const { headers, url, method } = req;
   // console.log(headers, url, method);
-  res.setHeader('Content-Type', 'application/json');
-  res.setHeader('X-Powered-By', 'Node.js');
+  /// First Method
+  // res.statusCode = 404;
+  // res.setHeader('Content-Type', 'application/json');
+  // res.setHeader('X-Powered-By', 'Node.js');
+
+  // Second Method
+  res.writeHead(404, {
+    'Content-Type': 'application/json',
+    'X-Powered-By': 'Node.js',
+  });
+  // res.end(
+  //   JSON.stringify({
+  //     success: true,
+  //     data: todos,
+  //   })
+  // );
   res.end(
     JSON.stringify({
-      success: true,
-      data: todos,
+      succes: false,
+      error: 'Not Found',
+      data: null,
     })
   );
 });
